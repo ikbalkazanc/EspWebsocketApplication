@@ -62,9 +62,6 @@ void setup(void)
 
   //http urlleri
   server.on("/", controlPanelPage);
-  server.on("/inline", []() {
-    server.send(200, "text/plain", "this works as well");
-  });
   server.on("/login", loginPage);
   server.on("/controlpanel", login);
   server.on("/logout", logOut);
@@ -133,6 +130,9 @@ void logOut()
 //giriş ekranına gönderiliyor
 void loginPage()
 {
+  if(isAuthorize){
+    controlPanelPage();
+  }
   server.send(200, "text/html", loginPageHtml);
 }
 //eğer yanlış bir path girilmiş ise hata dönülüypr
